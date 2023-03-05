@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "466364275740",
+    "project_id": "dey-chat-4c203",
+    "storage_bucket": "dey-chat-4c203.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466364275740:android:19980fde4f11a57bea93d9",
+        "android_client_info": {
+          "package_name": "com.example.flashchatter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466364275740-gfbn8sm933dm4v0gq0jdjuubtehnppo6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMeTnlLdMMa0-g4ca9qRQr1S96Yd3aKuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466364275740-gfbn8sm933dm4v0gq0jdjuubtehnppo6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
