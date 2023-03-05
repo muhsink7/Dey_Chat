@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Initialize Firebase before running app, otherwise app won't open
   await Firebase.initializeApp(); runApp(FlashChatter());}
-//finalise the Firebase initialisation before running the app
+//finalise the Firebase
 class FlashChatter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
