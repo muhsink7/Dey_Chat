@@ -7,7 +7,7 @@ import 'package:flashchatter/screens/chat_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // comparing pull request
+  // Initialize Firebase before running app, otherwise app won't open
   await Firebase.initializeApp(); runApp(FlashChatter());}
 //finalise the Firebase initialisation before running the app
 class FlashChatter extends StatelessWidget {
