@@ -1,16 +1,26 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flashchatter/screens/welcome_screen.dart';
-import 'package:flashchatter/screens/login_screen.dart';
-import 'package:flashchatter/screens/registration_screen.dart';
-import 'package:flashchatter/screens/chat_screen.dart';
+import 'package:dey_chat/screens/welcome_screen.dart';
+import 'package:dey_chat/screens/login_screen.dart';
+import 'package:dey_chat/screens/registration_screen.dart';
+import 'package:dey_chat/screens/chat_screen.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize Firebase before running app, otherwise app won't open
-  await Firebase.initializeApp(); runApp(FlashChatter());}
+  await Firebase.initializeApp();
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+  runApp(const FlashChatter());
+}
+
 //finalise the Firebase
 class FlashChatter extends StatelessWidget {
+  const FlashChatter({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

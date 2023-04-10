@@ -1,6 +1,7 @@
-import 'package:flashchatter/components/rounded_button.dart';
-import 'package:flashchatter/constants.dart';
-import 'package:flashchatter/screens/chat_screen.dart';
+import 'package:dey_chat/components/rounded_button.dart';
+import 'package:dey_chat/constants.dart';
+import 'package:dey_chat/screens/chat_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -8,6 +9,8 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 class LoginScreen extends StatefulWidget {
 
   static String id = 'login_screen';
+
+  const LoginScreen({super.key});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -24,6 +27,27 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    requestPermission();
+  }
+  void requestPermission() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      print('User granted provisional permission');
+    } else {
+      print('User declined or has not accepted permission');
+    }
   }
 
   void getUserLoggedIn(){
@@ -37,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,13 +69,13 @@ class _LoginScreenState extends State<LoginScreen> {
               Flexible(
                 child: Hero(
                   tag: 'logo',
-                  child: Container(
+                  child: SizedBox(
                     height: 200.0,
                     child: Image.asset('images/logo.png'),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 48.0,
               ),
               TextField(
@@ -61,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 decoration: kTextFieldDecoration.copyWith(hintText: 'Enter the email.'),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8.0,
               ),
               TextField(
@@ -71,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 decoration: kTextFieldDecoration.copyWith(hintText: 'Enter the password.'),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24.0,
               ),
               RoundedButton(colour: Colors.lightBlueAccent, title: 'Log In',
@@ -81,9 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 });
                 try{
                 final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-                if(user != null){
-                  Navigator.pushNamed(context, ChatScreen.id);
-                }
+                Navigator.pushNamed(context, ChatScreen.id);
                 setState(() {
                   showSpinner = false;
                 });

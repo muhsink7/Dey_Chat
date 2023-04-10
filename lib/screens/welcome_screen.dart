@@ -1,11 +1,13 @@
-import 'package:flashchatter/screens/login_screen.dart';
-import 'package:flashchatter/screens/registration_screen.dart';
+import 'package:dey_chat/screens/login_screen.dart';
+import 'package:dey_chat/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flashchatter/components/rounded_button.dart';
+import 'package:dey_chat/components/rounded_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static String id = 'welcome_screen';
+
+  const WelcomeScreen({super.key});
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -22,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.initState();
 
     controller = AnimationController(
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
       vsync: this,
     );
     animation = ColorTween(begin: Colors.lightBlueAccent, end: Colors.white)
@@ -46,7 +48,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     return Scaffold(
       backgroundColor: animation.value,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -55,16 +57,16 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               children: <Widget>[
                 Hero(
                   tag: 'logo',
-                  child: Container(
-                    child: Image.asset('images/logo.png'),
+                  child: SizedBox(
                     height: 60.0,
+                    child: Image.asset('images/logo.png'),
                   ),
                 ),
                 AnimatedTextKit(
                   animatedTexts: [
                     TypewriterAnimatedText(
                       'Flash Chatter',
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 38.0,
                         fontWeight: FontWeight.w900,
                       ),
@@ -73,7 +75,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 48.0,
             ),
             RoundedButton(
